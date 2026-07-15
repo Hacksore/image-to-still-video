@@ -19,7 +19,7 @@ if ! command -v ffmpeg >/dev/null 2>&1; then
   exit 1
 fi
 
-ffmpeg -y \
+if ! ffmpeg -y \
   -loop 1 \
   -i "$input_image" \
   -c:v libx264 \
@@ -28,4 +28,7 @@ ffmpeg -y \
   -pix_fmt yuv420p \
   -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" \
   -movflags +faststart \
-  "$output_video"
+  "$output_video"; then
+  echo "Failed to create video with ffmpeg." >&2
+  exit 1
+fi
