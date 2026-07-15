@@ -32,3 +32,5 @@ if ! ffmpeg -y \
   echo "Failed to create video with ffmpeg." >&2
   exit 1
 fi
+
+echo "Video created successfully: $output_video"
